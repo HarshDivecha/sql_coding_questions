@@ -29,3 +29,11 @@ GROUP BY a.name
 ORDER BY "smallest_order";
 
 
+-- test if there are any accounts associated with more than one region.
+
+SELECT a.name, COUNT(r.id) as "regions"
+FROM accounts a
+JOIN sales_reps s ON a.sales_rep_id = s.id
+JOIN region r ON r.id = s.region_id
+GROUP BY a.name
+HAVING COUNT(r.id) > 1
